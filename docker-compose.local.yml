@@ -1,0 +1,28 @@
+version: '3.8'
+
+# Local development docker-compose
+# Usage: docker-compose -f docker-compose.local.yml up
+
+services:
+  x402-facilitator:
+    build: .
+    container_name: x402-facilitator-local
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - PORT=8080
+      - RUST_LOG=debug
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

@@ -12,7 +12,7 @@ echo "=== Updating x402-facilitator from ECR ==="
 # Get AWS Account ID and Region
 ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
 AWS_REGION=${AWS_REGION:-us-east-2}
-ECR_REPOSITORY="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/stakedao/x402-facilitator"
+ECR_REPOSITORY="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/x402-facilitator/x402-facilitator"
 
 echo "ECR Repository: $ECR_REPOSITORY:latest"
 

@@ -204,7 +204,9 @@ export IMAGE="x402-facilitator"
 ./scripts/build-and-push.sh latest
 ```
 
-This pushes to: `{ACCOUNT_ID}.dkr.ecr.us-east-2.amazonaws.com/stakedao/x402-facilitator`
+This pushes to: `{ACCOUNT_ID}.dkr.ecr.us-east-2.amazonaws.com/stakecapital/x402-facilitator`
+
+**ECR Repository**: The Docker images are stored in `stakecapital/x402-facilitator` ECR repository in `us-east-2`.
 
 **Production Deployment**:
 The service runs at `https://facilitator.prod.stake.capital/`

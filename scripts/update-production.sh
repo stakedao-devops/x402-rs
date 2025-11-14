@@ -9,16 +9,17 @@ X402_HOME=/opt/x402-facilitator
 
 echo "=== Updating x402-facilitator from ECR ==="
 
-# Get AWS Account ID and Region
-ACCOUNT_ID=$(aws sts get-caller-identity | jq -r .Account)
+# ECR repository is in the control-plane account, not the prod account
+# Cross-account access is configured via ECR repository policy
+CONTROL_PLANE_ACCOUNT_ID="105007662576"
 AWS_REGION=${AWS_REGION:-us-east-2}
-ECR_REPOSITORY="${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/stakecapital/x402-facilitator"
+ECR_REPOSITORY="${CONTROL_PLANE_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/stakecapital/x402-facilitator"
 
 echo "ECR Repository: $ECR_REPOSITORY:latest"
 
-# Login to ECR
+# Login to ECR (authenticate to control-plane account's ECR)
 echo "=== Logging into ECR ==="
-aws ecr get-login-password --region "${AWS_REGION}" | docker login --username AWS --password-stdin "${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+aws ecr get-login-password --region "${AWS_REGION}" | docker login --username AWS --password-stdin "${CONTROL_PLANE_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
 
 # Pull latest image
 echo "=== Pulling latest image ==="

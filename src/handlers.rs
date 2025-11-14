@@ -285,6 +285,10 @@ pub async fn get_root() -> impl IntoResponse {
                     <img src="/static/base.png" alt="Base">
                     <span class="network-name">Base</span>
                 </div>
+                <div class="network-card">
+                    <img src="/static/celo.png" alt="Celo">
+                    <span class="network-name">Celo</span>
+                </div>
             </div>
         </div>
 

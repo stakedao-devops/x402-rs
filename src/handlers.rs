@@ -196,9 +196,10 @@ pub async fn get_root() -> impl IntoResponse {
 
         .networks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 2rem;
-            margin: 2rem 0;
+            margin: 2rem auto;
+            max-width: 900px;
         }
 
         .network-card {
@@ -274,6 +275,10 @@ pub async fn get_root() -> impl IntoResponse {
                     <span class="network-name">Avalanche</span>
                 </div>
                 <div class="network-card">
+                    <img src="/static/celo.png" alt="Celo">
+                    <span class="network-name">Celo</span>
+                </div>
+                <div class="network-card">
                     <img src="/static/solana.png" alt="Solana">
                     <span class="network-name">Solana</span>
                 </div>
@@ -284,10 +289,6 @@ pub async fn get_root() -> impl IntoResponse {
                 <div class="network-card">
                     <img src="/static/base.png" alt="Base">
                     <span class="network-name">Base</span>
-                </div>
-                <div class="network-card">
-                    <img src="/static/celo.png" alt="Celo">
-                    <span class="network-name">Celo</span>
                 </div>
             </div>
         </div>

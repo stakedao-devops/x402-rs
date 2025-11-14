@@ -45,6 +45,12 @@ pub enum Network {
     /// Polygon mainnet (chain ID 137).
     #[serde(rename = "polygon")]
     Polygon,
+    /// Celo Alfajores testnet (chain ID 44787).
+    #[serde(rename = "celo-alfajores")]
+    CeloAlfajores,
+    /// Celo mainnet (chain ID 42220).
+    #[serde(rename = "celo")]
+    Celo,
     /// Sei mainnet (chain ID 1329).
     #[serde(rename = "sei")]
     Sei,
@@ -65,6 +71,8 @@ impl Display for Network {
             Network::SolanaDevnet => write!(f, "solana-devnet"),
             Network::PolygonAmoy => write!(f, "polygon-amoy"),
             Network::Polygon => write!(f, "polygon"),
+            Network::CeloAlfajores => write!(f, "celo-alfajores"),
+            Network::Celo => write!(f, "celo"),
             Network::Sei => write!(f, "sei"),
             Network::SeiTestnet => write!(f, "sei-testnet"),
         }
@@ -89,6 +97,8 @@ impl From<Network> for NetworkFamily {
             Network::SolanaDevnet => NetworkFamily::Solana,
             Network::PolygonAmoy => NetworkFamily::Evm,
             Network::Polygon => NetworkFamily::Evm,
+            Network::CeloAlfajores => NetworkFamily::Evm,
+            Network::Celo => NetworkFamily::Evm,
             Network::Sei => NetworkFamily::Evm,
             Network::SeiTestnet => NetworkFamily::Evm,
         }
@@ -108,6 +118,8 @@ impl Network {
             Network::SolanaDevnet,
             Network::PolygonAmoy,
             Network::Polygon,
+            Network::CeloAlfajores,
+            Network::Celo,
             Network::Sei,
             Network::SeiTestnet,
         ]
@@ -247,6 +259,36 @@ static USDC_POLYGON: Lazy<USDCDeployment> = Lazy::new(|| {
     })
 });
 
+/// Lazily initialized known USDC deployment on Celo Alfajores testnet as [`USDCDeployment`].
+static USDC_CELO_ALFAJORES: Lazy<USDCDeployment> = Lazy::new(|| {
+    USDCDeployment(TokenDeployment {
+        asset: TokenAsset {
+            address: address!("0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B").into(),
+            network: Network::CeloAlfajores,
+        },
+        decimals: 6,
+        eip712: Some(TokenDeploymentEip712 {
+            name: "USDC".into(),
+            version: "2".into(),
+        }),
+    })
+});
+
+/// Lazily initialized known USDC deployment on Celo mainnet as [`USDCDeployment`].
+static USDC_CELO: Lazy<USDCDeployment> = Lazy::new(|| {
+    USDCDeployment(TokenDeployment {
+        asset: TokenAsset {
+            address: address!("0xcebA9300f2b948710d2653dD7B07f33A8B32118C").into(),
+            network: Network::Celo,
+        },
+        decimals: 6,
+        eip712: Some(TokenDeploymentEip712 {
+            name: "USD Coin".into(),
+            version: "2".into(),
+        }),
+    })
+});
+
 static USDC_SEI: Lazy<USDCDeployment> = Lazy::new(|| {
     USDCDeployment(TokenDeployment {
         asset: TokenAsset {
@@ -320,6 +362,8 @@ impl USDCDeployment {
             Network::SolanaDevnet => &USDC_SOLANA_DEVNET,
             Network::PolygonAmoy => &USDC_POLYGON_AMOY,
             Network::Polygon => &USDC_POLYGON,
+            Network::CeloAlfajores => &USDC_CELO_ALFAJORES,
+            Network::Celo => &USDC_CELO,
             Network::Sei => &USDC_SEI,
             Network::SeiTestnet => &USDC_SEI_TESTNET,
         }

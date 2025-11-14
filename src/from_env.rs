@@ -20,6 +20,8 @@ pub const ENV_RPC_SOLANA: &str = "RPC_URL_SOLANA";
 pub const ENV_RPC_SOLANA_DEVNET: &str = "RPC_URL_SOLANA_DEVNET";
 pub const ENV_RPC_POLYGON_AMOY: &str = "RPC_URL_POLYGON_AMOY";
 pub const ENV_RPC_POLYGON: &str = "RPC_URL_POLYGON";
+pub const ENV_RPC_CELO_ALFAJORES: &str = "RPC_URL_CELO_ALFAJORES";
+pub const ENV_RPC_CELO: &str = "RPC_URL_CELO";
 pub const ENV_RPC_SEI: &str = "RPC_URL_SEI";
 pub const ENV_RPC_SEI_TESTNET: &str = "RPC_URL_SEI_TESTNET";
 
@@ -34,6 +36,8 @@ pub fn rpc_env_name_from_network(network: Network) -> &'static str {
         Network::SolanaDevnet => ENV_RPC_SOLANA_DEVNET,
         Network::PolygonAmoy => ENV_RPC_POLYGON_AMOY,
         Network::Polygon => ENV_RPC_POLYGON,
+        Network::CeloAlfajores => ENV_RPC_CELO_ALFAJORES,
+        Network::Celo => ENV_RPC_CELO,
         Network::Sei => ENV_RPC_SEI,
         Network::SeiTestnet => ENV_RPC_SEI_TESTNET,
     }
